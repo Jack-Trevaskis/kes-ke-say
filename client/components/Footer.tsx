@@ -27,7 +27,7 @@ function Footer() {
             </div>
           </div>
           <p className="mt-8 text-xs text-gray-800">
-            © Mako-Kōtare 2024 | Kes-Ke-Say Limited
+            © Manaia-Christchurch 2024 | Kes-Ke-Say Limited
           </p>
         </div>
       </footer>
