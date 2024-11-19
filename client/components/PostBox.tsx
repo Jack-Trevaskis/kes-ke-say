@@ -9,7 +9,6 @@ interface Props {
 export default function PostBox({ post }: Props) {
   const {
     userImage,
-    userId,
     userAccountName,
     userFullName,
     postId,
@@ -29,7 +28,7 @@ export default function PostBox({ post }: Props) {
     <div className="flex gap-8 text-sky-800">
       <div className="flex-1">
         <Link
-          to={'users/' + userId}
+          to={'/profiles/' + userAccountName}
           className="flex items-center gap-4 hover:underline font-semibold"
         >
           <img
@@ -57,12 +56,6 @@ export default function PostBox({ post }: Props) {
           <Link className="hover:underline" to={'/post/' + postId}>
             Open
           </Link>
-          {/* <Link className="hover:underline" to="/">
-            Comment
-          </Link>
-          <Link className="hover:underline" to="/">
-            Edit
-          </Link> */}
           <ReactionBox votes={postVotes} />
         </span>
       </div>
