@@ -19,7 +19,7 @@ describe('<AllProfiles />', () => {
   it('should render loading message', async () => {
     // ARRANGE
     // 'nock' an http network call
-    const scope = nock(document.baseURI)
+    nock(document.baseURI)
       // Fake the 'get' request and reply
       .get('/api/v1/users')
       .reply(200, [
@@ -57,6 +57,7 @@ describe('<AllProfiles />', () => {
     // ARRANGE
     // 'nock' an http network call
     const scope = nock(document.baseURI)
+    // nock(document.baseURI)
     // Fake the 'get' request and reply
     .get('/api/v1/users')
       .reply(200, [
