@@ -10,7 +10,8 @@ export interface Post extends PostData {
 }
 
 export interface PostResponse {
-  userName: string
+  userAccountName: string
+  userFullName: string
   userImage: string
   userId: string
   postId: number
