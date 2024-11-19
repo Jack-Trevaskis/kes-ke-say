@@ -1,15 +1,6 @@
-import {
-  describe,
-  it,
-  expect,
-  beforeAll,
-  beforeEach,
-  afterAll,
-  vi,
-} from 'vitest'
+import { describe, it, expect, afterAll, vi } from 'vitest'
 import request from 'supertest'
 import server from '../../server'
-import db from '../../db/connection'
 import * as func from '../../db/functions/posts'
 vi.mock('../../db/functions/posts')
 

@@ -1,5 +1,5 @@
 import request from 'superagent'
-import { Post, PostResponse } from '../../models/post'
+import { PostResponse } from '../../models/post'
 
 const rootURL = new URL(`/api/v1`, document.baseURI).toString()
 
