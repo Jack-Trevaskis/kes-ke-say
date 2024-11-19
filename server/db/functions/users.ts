@@ -10,9 +10,7 @@ export async function getAllUsers(): Promise<User[]> {
   )
 }
 
-//oops this is for next ticket
-
-export async function getUserByUsername(username: string): Promise<User> {
+export async function getUserByUsername(username: string): Promise<User | undefined> {
   const user = await connection('users')
   .where({username})
   .select('id',
