@@ -1,8 +1,11 @@
 import useGroups from "../hooks/use-groups";
 import { Group } from '../../models/groups.ts'
+import { useNavigate } from "react-router-dom";
 
 export function AllGroups() {
     const { isLoading, isError, data: groups = [] } = useGroups(); // Default `groups` to an empty array.
+
+    const navigate = useNavigate()
 
     // Conditional rendering based on the query state.
     if (isLoading) return <div>Loading...</div>;
@@ -10,6 +13,7 @@ export function AllGroups() {
 
     console.log(groups)
 
+    
     return (
         <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
             <button
@@ -37,6 +41,7 @@ export function AllGroups() {
                     groups.map((group: Group) => (
                         <div
                             key={group.id}
+                            onClick={() => navigate('/groups/' + group.id)}
                             style={{
                                 display: 'flex', // Flexbox layout
                                 flexDirection: 'column', // Stack children vertically
