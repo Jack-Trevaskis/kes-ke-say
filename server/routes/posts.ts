@@ -16,6 +16,7 @@ router.get('/', async (req, res) => {
   }
 })
 
+// GET /api/v1/posts/:id
 router.get('/:id', async (req, res) => {
   try {
     const result = await db.getPostById(req.params.id)
