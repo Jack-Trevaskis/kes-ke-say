@@ -9,7 +9,7 @@ export function usePosts() {
   return query
 }
 
-export function usePost(id: number) {
+export function usePost(id: string) {
   const query = useQuery({
     queryKey: ['post', id],
     queryFn: () => api.getPostById(id),
