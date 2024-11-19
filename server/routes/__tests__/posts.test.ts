@@ -8,11 +8,9 @@ import {
   vi,
 } from 'vitest'
 import request from 'supertest'
-
 import server from '../../server'
 import db from '../../db/connection'
 import * as func from '../../db/functions/posts'
-
 vi.mock('../../db/functions/posts')
 
 const mockPosts = [
@@ -70,5 +68,12 @@ describe('Getting posts', () => {
         },
       ]
     `)
+  })
+
+  it('throws a database error', async () => {
+    vi.mocked(func.getAllPosts).mockRejectedValue(mockPosts)
+    const res = await request(server).get('/api/v1/posts/')
+    // console.log(res.body)
+    expect(res.statusCode).toBe(500)
   })
 })
