@@ -16,4 +16,18 @@ router.get('/', async (req, res) => {
   }
 })
 
+router.get('/:id', async (req, res) => {
+  try {
+    const result = await db.getPostById(req.params.id)
+    if (result === undefined) res.sendStatus(404)
+    // console.log(result)
+    res.json(result)
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message)
+    } else console.error('unknown error')
+    res.sendStatus(500)
+  }
+})
+
 export default router
