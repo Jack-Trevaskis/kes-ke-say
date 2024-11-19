@@ -7,7 +7,7 @@ export default function useGroups() {
         queryFn: async () => {
             const res = await request.get('/api/v1/groups')
             if (res.ok) {
-                console.log('res.body:', res.body)
+                // console.log('res.body:', res.body)
                 return res.body
             }
 

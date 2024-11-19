@@ -13,7 +13,7 @@ export const db = knex(config);
 export async function getAllGroups () {
 
     const groups = await db('groups')
-    console.log(groups)
+    // console.log(groups)
     return groups
 }
 
