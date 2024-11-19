@@ -16,6 +16,17 @@ router.get('/', async (req, res) => {
   }
 })
 
-
+// GET /api/v1/users/:username
+router.get('/:username', async (req, res) => {
+  const username = req.params.username
+  if (!username) { return res.status(400).json({ message: 'Invalid id' }) }
+  try {
+    const user = await db.getUserByUsername(username)
+    res.status(200).json(user)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ message: 'Cannot get user' })
+  }
+})
 
 export default router
