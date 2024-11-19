@@ -1,4 +1,5 @@
 import db from '../connection'
+import { PostResponse } from '../../../models/post'
 
 export async function getAllPosts() {
   const result = await db('posts')
@@ -13,7 +14,7 @@ export async function getAllPosts() {
       'posts.image as postImage',
       'posts.created_at as postCreatedAt',
     )
-  return result
+  return result as PostResponse[]
 }
 
 export async function getPostById(ids: string) {
@@ -33,5 +34,5 @@ export async function getPostById(ids: string) {
     )
     .first()
 
-  return result
+  return result as PostResponse
 }
