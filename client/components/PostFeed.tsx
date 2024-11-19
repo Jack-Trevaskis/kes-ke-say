@@ -7,13 +7,16 @@ export default function PostFeed() {
 
   if (isLoading)
     return (
-      <p className="p-24 flex justify-center items-center">
+      <p
+        data-testid="post-feed-spinner"
+        className="p-24 flex justify-center items-center"
+      >
         <Spinner />
       </p>
     )
   if (isError || !posts) return <p>Error</p>
   return (
-    <section className="flex flex-col gap-24 py-24">
+    <section data-testid="post-feed" className="flex flex-col gap-24 py-24">
       {posts.map((post) => (
         <PostBox key={post.postId} post={post} />
       ))}

@@ -31,13 +31,18 @@ export default function PostBox({ post }: Props) {
           className="flex items-center gap-4 hover:underline font-semibold"
         >
           <img
+            data-testid="post-user-avatar"
             src={`/images/avatars/${userImage}`}
             alt=""
             className="size-8 bg-blue-300 rounded-full"
           />
-          {userFullName} ({userAccountName})
+          <p data-testid="post-user-name">
+            {userFullName} ({userAccountName})
+          </p>
         </Link>
-        <p className="mt-4">{postBody}</p>
+        <p data-testid="post-body" className="mt-4">
+          {postBody}
+        </p>
         {/* <div>Images</div> */}
 
         <span className="mt-6 text-xs flex items-center gap-2">
