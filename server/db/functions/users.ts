@@ -16,9 +16,9 @@ export async function getAllUsers(): Promise<User[]> {
 //   const user = await connection('users')
 //   .where({id})
 //   .select('id',
-//     'auth0_id as auth0Id', 
-//     'username', 
-//     'full_name as fullName', 
+    // 'auth0_id as auth0Id', 
+    // 'username', 
+    // 'full_name as fullName', 
 //     'location', 
 //     'image',
 //   )
