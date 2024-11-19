@@ -3,7 +3,7 @@ import { createRoutesFromElements, Route } from 'react-router-dom'
 import LandingPage from './components/LandingPage'
 import App from './components/App'
 import Home from './components/Home'
-import AllProfiles from './components/Profiles'
+import AllProfiles from './components/AllProfiles'
 import Profile from './components/Profile'
 
 export const routes = createRoutesFromElements(
