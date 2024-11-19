@@ -8,11 +8,13 @@ export default function AllProfiles() {
   if(isLoading) return "Loading..."
   if(isError) return <h2>An error has occurred loading users.</h2>
     
-    return (<>
-    <h2 className="text-center">All Profiles</h2>
-        <div className="UserProfilesList bg-black text-white flex justify-around">
-          {users?.map((u) => (<><div className="profile flex-wrap text-center">
-              <Link to={`/profiles/${u.username}`}><img alt="" src={`../images/avatars/${u.image}`}/>{u.username}</Link></div></>))}           
-        </div></>
+    return (
+    <div className="text-red-950">
+    <h2 className="text-center mt-4 mb-4">All Profiles</h2>
+        <div className="UserProfilesList text-white flex justify-around flex-wrap">
+          {users?.map((u) => (<><div className="profile text-center justify-center text-red-950">
+              <Link to={`/profiles/${u.username}`}><img alt="" className="max-w-48 max-h-48 border-4 rounded-full border-red-950" src={`../images/avatars/${u.image}`}/>{u.username}</Link></div></>))}           
+        </div>
+        </div>
     )
 }
