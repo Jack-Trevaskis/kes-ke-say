@@ -1,6 +1,6 @@
 export default function Spinner() {
   return (
-    <div role="status">
+    <>
       <svg
         aria-hidden="true"
         className="size-8 animate-spin text-slate-200 fill-slate-600"
@@ -18,6 +18,6 @@ export default function Spinner() {
         />
       </svg>
       <span className="sr-only">Loading...</span>
-    </div>
+    </>
   )
 }
