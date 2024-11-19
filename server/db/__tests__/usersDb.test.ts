@@ -43,6 +43,6 @@ describe('getUserByUsername', () => {
     const username = exampleUser.username
     const user = await getUserByUsername(username)
     expect(user).toStrictEqual(exampleUser)
-    expect(user.location).toBe('Auckland')
+    expect(user?.location).toBe('Auckland')
   })
 })
