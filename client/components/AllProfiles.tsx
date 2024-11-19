@@ -11,8 +11,8 @@ export default function AllProfiles() {
     return (<>
     <h2 className="text-center">All Profiles</h2>
         <div className="UserProfilesList bg-black text-white flex justify-around">
-          {users?.map((u) => (<><div className="profile flex-wrap text-center"><li key={u.username}>
-              <Link to={`/profiles/${u.username}`}><img alt="" src={`../images/avatars/${u.image}`}/>{u.username}</Link></li></div></>))}           
+          {users?.map((u) => (<><div className="profile flex-wrap text-center">
+              <Link to={`/profiles/${u.username}`}><img alt="" src={`../images/avatars/${u.image}`}/>{u.username}</Link></div></>))}           
         </div></>
     )
 }
