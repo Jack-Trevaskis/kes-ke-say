@@ -1,21 +1,21 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-import useGroups from "../hooks/use-groups";
+import useGroup from "../hooks/use-group";
 import { Group as GroupInterface} from '../../models/groups.ts'
 
 export function Group() {
   const [comp, setComp] = useState('');
   const navigate = useNavigate();
 
-  const { isLoading, isError, data: groups = [] } = useGroups(); // Default `groups` to an empty array.
+  const { isLoading, isError, data: group = [] } = useGroup(); // Default `group` to an empty array.
 
 
   // Conditional rendering based on the query state.
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error loading groups!</div>;
 
-  console.log(groups)
+  console.log(group)
 
   const { id } = useParams();
   const groupId = parseInt(id || '', 10);
@@ -93,7 +93,7 @@ export function Group() {
         }}
       >
         <img
-          src={'/images/icons/' + groups.find(group => group.id === groupId).image}
+          src={'/images/icons/' + group.image}
           alt="Group"
           style={{
             width: '100%',
@@ -109,7 +109,7 @@ export function Group() {
             color: '#333',
           }}
         >
-          {groups.find(group => group.id === groupId).name}
+          {group.name}
         </p>
       </div>
 

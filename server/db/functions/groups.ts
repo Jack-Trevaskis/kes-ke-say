@@ -17,7 +17,14 @@ export async function getAllGroups () {
     return groups
 }
 
+export async function getGroupById (id: Number) {
+    const group = await db('groups').where('id', id)
+    console.log('group by id: ' + group)
+    return group
+}
+
 // Create
+
 
 // Read
 
