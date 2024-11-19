@@ -31,6 +31,7 @@ export async function getPostById(ids: string) {
       'posts.image as postImage',
       'posts.created_at as postCreatedAt',
     )
+    .first()
 
   return result
 }
