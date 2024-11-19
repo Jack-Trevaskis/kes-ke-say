@@ -10,10 +10,10 @@ import {
 import request from 'supertest'
 
 import server from '../../server'
-import db from '../connection'
-import * as func from '../functions/posts'
+import db from '../../db/connection'
+import * as func from '../../db/functions/posts'
 
-vi.mock('../functions/posts.ts')
+vi.mock('../../db/functions/posts')
 
 const mockPosts = [
   {
