@@ -13,11 +13,19 @@ const mockUsers = [
 ]
 
 describe('GET ap1/v1/users', () => {
+  //happy path
   it('should show the users', async () => {
     vi.mocked(usersDb.getAllUsers).mockResolvedValue(mockUsers)
     const res = await request(server).get('/api/v1/users')
 
     expect(res.statusCode).toBe(200)
     expect(res.body).toEqual(mockUsers)
+  })
+  //sad path
+  it('should return an error if the database is down', async () => {
+    vi.mocked(usersDb.getAllUsers).mockRejectedValue(new Error('Database is down'))
+    const res = await request(server).get('/api/v1/users')
+    expect(res.statusCode).toBe(500)
+    expect(res.body).toEqual({ message: 'Cannot get all users' })
   })
 })
