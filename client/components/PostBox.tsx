@@ -54,7 +54,7 @@ export default function PostBox({ post }: Props) {
         </span>
 
         <span className="mt-1 text-sm flex items-center gap-2">
-          <Link className="hover:underline" to={'/posts/' + postId}>
+          <Link className="hover:underline" to={'/post/' + postId}>
             Open
           </Link>
           {/* <Link className="hover:underline" to="/">
