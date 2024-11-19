@@ -17,13 +17,13 @@ describe('All Groups', () => {
   it('it should display loading message', async () => {
     // ARRANGE
     // Mock the API endpoint
-    const scope = nock(document.baseURI).get('/api/v1/groups').reply(200)
+    nock(document.baseURI).get('/api/v1/groups').reply(200)
 
     // ACT
     // Render the component
     const { ...screen } = renderRoute('/groups')
 
-    const loadingMessage = await screen.getByText(/loading/i) // 'loading'
+    const loadingMessage = screen.getByText(/loading/i) // 'loading'
     // 'loading'
     expect(loadingMessage).toBeInTheDocument()
   })
@@ -40,7 +40,7 @@ describe('All Groups', () => {
     // ACT
     // Render the component
     const { ...screen } = renderRoute('/groups')
-
+    screen.debug()
     // ASSERT
     // Check if the loading message is not displayed
     await waitForElementToBeRemoved(() => screen.getByText(/loading/i))
