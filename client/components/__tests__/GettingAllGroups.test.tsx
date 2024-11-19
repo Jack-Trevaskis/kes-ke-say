@@ -24,6 +24,7 @@ describe('All Groups', () => {
     const { ...screen } = renderRoute('/groups')
 
     const loadingMessage = await screen.getByText(/loading/i) // 'loading'
+    // 'loading'
     expect(loadingMessage).toBeInTheDocument()
   })
 
@@ -49,6 +50,7 @@ describe('All Groups', () => {
     expect(name1).toBeVisible()
     const name2 = await screen.findByText('Group 2')
     expect(name2).toBeVisible()
+
     // Check if the API call was made
     expect(scope.isDone()).toBe(true)
   })
