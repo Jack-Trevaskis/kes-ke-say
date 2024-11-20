@@ -1,12 +1,18 @@
 import { Link } from 'react-router-dom'
 import { PostResponse } from '../../models/post'
 import serialiseDate from '../utils/serialiseDate'
+import { usePost } from '../hooks/posthooks'
 
 interface Props {
   post: PostResponse
 }
 
 export default function PostBox({ post }: Props) {
+  const postHook = usePost(String(post.postId))
+
+  if (postHook.isLoading) return <p>none</p>
+  if (postHook.isError) return <p>none</p>
+
   const {
     userImage,
     userAccountName,
@@ -22,6 +28,10 @@ export default function PostBox({ post }: Props) {
     cheese: 25,
     sunrise: 0,
     icon: 53,
+  }
+
+  const handleDelete = () => {
+    postHook.delete.mutate(String(postId))
   }
 
   return (
@@ -56,6 +66,9 @@ export default function PostBox({ post }: Props) {
           <Link className="hover:underline" to={'/post/' + postId}>
             Open
           </Link>
+          <button onClick={handleDelete} className="hover:underline">
+            Delete
+          </button>
           <ReactionBox votes={postVotes} />
         </span>
       </div>
