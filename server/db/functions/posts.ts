@@ -36,3 +36,9 @@ export async function getPostById(ids: string) {
 
   return result as PostResponse
 }
+
+export async function deletePost(ids: string) {
+  const id = Number(ids)
+  const result = await db('posts').where({ id }).del()
+  console.log(result)
+}
