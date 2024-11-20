@@ -1,4 +1,9 @@
-import { useQuery } from '@tanstack/react-query'
+import {
+  MutationFunction,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query'
 import * as api from '../apis/posts'
 
 export function usePosts() {
@@ -15,4 +20,19 @@ export function usePost(id: string) {
     queryFn: () => api.getPostById(id),
   })
   return query
+}
+
+export function usePostMutation<TData = unknown, TVariables = unknown>(
+  mutationFn: MutationFunction<TData, TVariables>,
+) {
+  const queryClient = useQueryClient()
+
+  const mutation = useMutation({
+    mutationFn,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['post'] })
+      queryClient.invalidateQueries({ queryKey: ['posts'] })
+    },
+  })
+  return mutation
 }
