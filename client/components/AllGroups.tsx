@@ -3,7 +3,7 @@ import { Group } from '../../models/groups.ts'
 import { useNavigate } from 'react-router-dom'
 
 export function AllGroups() {
-  const { isLoading, isError, data: groups, error = [] } = useGroups() // Default `groups` to an empty array.
+  const { isLoading, isError, data: groups } = useGroups() // Default `groups` to an empty array.
 
   const navigate = useNavigate()
 

@@ -1,30 +1,24 @@
-import { useParams, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-
-import useGroups from "../hooks/use-groups";
-import { Group as GroupInterface} from '../../models/groups.ts'
+import { useParams, useNavigate } from 'react-router-dom'
+import useGroups from '../hooks/use-groups'
 
 export function Group() {
-  const [comp, setComp] = useState('');
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+  const { id } = useParams()
 
-  const { isLoading, isError, data: groups = [] } = useGroups(); // Default `groups` to an empty array.
-
+  const { isLoading, isError, data: groups = [] } = useGroups() // Default `groups` to an empty array.
 
   // Conditional rendering based on the query state.
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error loading groups!</div>;
+  if (isLoading) return <div>Loading...</div>
+  if (isError) return <div>Error loading groups!</div>
 
   console.log(groups)
 
-  const { id } = useParams();
-  const groupId = parseInt(id || '', 10);
-  console.log(groupId);
+  const groupId = parseInt(id || '', 10)
+  console.log(groupId)
 
   const viewAllGroups = () => {
-    navigate('/groups');
-  };
-
+    navigate('/groups')
+  }
 
   return (
     <div
@@ -93,7 +87,10 @@ export function Group() {
         }}
       >
         <img
-          src={'/images/icons/' + groups.find(group => group.id === groupId).image}
+          src={
+            '/images/icons/' +
+            groups.find((group) => group.id === groupId).image
+          }
           alt="Group"
           style={{
             width: '100%',
@@ -109,7 +106,7 @@ export function Group() {
             color: '#333',
           }}
         >
-          {groups.find(group => group.id === groupId).name}
+          {groups.find((group) => group.id === groupId).name}
         </p>
       </div>
 
@@ -157,5 +154,5 @@ export function Group() {
         </button>
       </div>
     </div>
-  );
+  )
 }
