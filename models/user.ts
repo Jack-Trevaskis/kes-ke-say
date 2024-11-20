@@ -15,3 +15,4 @@ export interface User {
   location: string
   image: string
 }
+

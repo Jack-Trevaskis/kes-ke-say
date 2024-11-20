@@ -11,3 +11,14 @@ export function useUsers() {
     ...query,
   }
 }
+
+export function useUser(username: string | undefined) {
+  const query = useQuery({
+    queryKey: ['user', username],
+    queryFn: () => API.getUser(username),
+  })
+
+  return {
+    ...query,
+  }
+}
