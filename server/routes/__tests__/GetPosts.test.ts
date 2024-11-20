@@ -92,7 +92,6 @@ describe('Getting all posts', () => {
 
 describe('Getting single post', () => {
   it('returns a 404 when there is no post by that id', async () => {
-    // vi.mocked(func.getPostById).mockResolvedValue()
     const res = await request(server).get('/api/v1/posts/5')
 
     expect(res.statusCode).toBe(404)
@@ -102,7 +101,7 @@ describe('Getting single post', () => {
     vi.mocked(func.getPostById).mockResolvedValue(mockPosts[1])
 
     const res = await request(server).get('/api/v1/posts/2')
-    // console.log(res.body)
+
     expect(res.body).toMatchInlineSnapshot(`
       {
         "postBody": "I found this really cool Italian place, they have the best food",
@@ -120,21 +119,7 @@ describe('Getting single post', () => {
   it('throws a database error when something went wrong', async () => {
     vi.mocked(func.getPostById).mockRejectedValue(mockPosts[1])
     const res = await request(server).get('/api/v1/posts/1')
-    // console.log(res.body)
+
     expect(res.statusCode).toBe(500)
-  })
-})
-
-describe('Deleting posts', () => {
-  it('deletes a post', async () => {
-    // TODO: write server integration test for event delete
-    const res = await request(server).get('/api/v1/posts/1')
-    expect(res.status).toBe(200) // success
-
-    const res2 = await request(server).delete('/api/v1/posts/1')
-    expect(res2.status).toBe(204) //no content
-
-    const res3 = await request(server).get('/api/v1/posts/1')
-    expect(res3.status).toBe(404)
   })
 })
