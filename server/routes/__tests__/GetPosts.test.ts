@@ -124,3 +124,17 @@ describe('Getting single post', () => {
     expect(res.statusCode).toBe(500)
   })
 })
+
+describe('Deleting posts', () => {
+  it('deletes a post', async () => {
+    // TODO: write server integration test for event delete
+    const res = await request(server).get('/api/v1/posts/1')
+    expect(res.status).toBe(200) // success
+
+    const res2 = await request(server).delete('/api/v1/posts/1')
+    expect(res2.status).toBe(204) //no content
+
+    const res3 = await request(server).get('/api/v1/posts/1')
+    expect(res3.status).toBe(404)
+  })
+})
