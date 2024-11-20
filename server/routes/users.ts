@@ -1,7 +1,6 @@
 import express from 'express'
 // import { User } from '../../models/user.ts'
 
-
 const router = express.Router()
 import * as db from '../db/functions/users.ts'
 
@@ -11,11 +10,9 @@ router.get('/', async (req, res) => {
     const users = await db.getAllUsers()
     res.status(200).json(users)
   } catch (error) {
-    console.log(error)
+    console.error(error)
     res.status(500).json({ message: 'Cannot get all users' })
   }
 })
-
-
 
 export default router
