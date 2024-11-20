@@ -36,7 +36,7 @@ export function AllGroups() {
       >
         {groups.length > 0 ? (
           groups.map((group: Group) => (
-            <div
+            <button
               key={group.id}
               onClick={() => navigate('/groups/' + group.id)}
               style={{
@@ -72,7 +72,7 @@ export function AllGroups() {
               >
                 {group.name}
               </div>
-            </div>
+            </button>
           ))
         ) : (
           <div style={{ textAlign: 'center', color: '#555' }}>
