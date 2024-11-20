@@ -1,6 +1,9 @@
 export default function Spinner() {
   return (
-    <>
+    <div
+      className="flex justify-center items-center py-24"
+      aria-label="loading-spinner"
+    >
       <svg
         aria-hidden="true"
         className="size-8 animate-spin text-slate-200 fill-slate-600"
@@ -18,6 +21,6 @@ export default function Spinner() {
         />
       </svg>
       <span className="sr-only">Loading...</span>
-    </>
+    </div>
   )
 }

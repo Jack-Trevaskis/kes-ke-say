@@ -9,10 +9,11 @@ interface Props {
 export default function PostBox({ post }: Props) {
   const {
     userImage,
-    userId,
     userAccountName,
     userFullName,
+    postId,
     postBody,
+    postImage,
     postCreatedAt,
   } = post
 
@@ -27,7 +28,7 @@ export default function PostBox({ post }: Props) {
     <div className="flex gap-8 text-sky-800">
       <div className="flex-1">
         <Link
-          to={'users/' + userId}
+          to={'/profiles/' + userAccountName}
           className="flex items-center gap-4 hover:underline font-semibold"
         >
           <img
@@ -43,7 +44,7 @@ export default function PostBox({ post }: Props) {
         <p data-testid="post-body" className="mt-4">
           {postBody}
         </p>
-        {/* <div>Images</div> */}
+        {postImage && <img src={postImage} alt="" className="mt-2 max-h-96" />}
 
         <span className="mt-6 text-xs flex items-center gap-2">
           <p className="relative top-[2px] text-slate-400">
@@ -52,15 +53,9 @@ export default function PostBox({ post }: Props) {
         </span>
 
         <span className="mt-1 text-sm flex items-center gap-2">
-          <Link className="hover:underline" to="/">
+          <Link className="hover:underline" to={'/post/' + postId}>
             Open
           </Link>
-          {/* <Link className="hover:underline" to="/">
-            Comment
-          </Link>
-          <Link className="hover:underline" to="/">
-            Edit
-          </Link> */}
           <ReactionBox votes={postVotes} />
         </span>
       </div>
