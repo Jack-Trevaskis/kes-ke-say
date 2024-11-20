@@ -54,4 +54,24 @@ describe('All Groups', () => {
     // Check if the API call was made
     expect(scope.isDone()).toBe(true)
   })
+
+  it('should render an error message', async () => {
+    //ARRANGE
+    // Mock the API endpoint with an error
+    const scope = nock(document.baseURI)
+      .get('/api/v1/groups')
+      .reply(500, { message: 'Error getting groups' })
+
+    // ACT
+    // Render the component
+    const { ...screen } = renderRoute('/groups')
+
+    // ASSERT
+    // Check if the error message is displayed
+    const errorMessage = await screen.findByText(/error loading groups/i)
+    expect(errorMessage).toBeVisible()
+
+    // Check if the API call was made
+    expect(scope.isDone()).toBe(true)
+  })
 })

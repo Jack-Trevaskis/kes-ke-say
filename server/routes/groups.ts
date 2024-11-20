@@ -7,15 +7,12 @@ const router = express.Router()
 router.get('/', async (req, res) => {
   // res.status(200).send('Hello from the groups route!')
   try {
-  const groups = await db.getAllGroups()
-  console.log(groups)
-  
+    const groups = await db.getAllGroups()
+    // console.log(groups)
     res.json(groups)
+  } catch (err) {
+    console.log('error')
   }
-
-  catch (err) {console.log('error')}
-  
-  
 })
 
 export default router
