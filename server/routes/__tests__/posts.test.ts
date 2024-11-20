@@ -57,7 +57,6 @@ describe('Getting all posts', () => {
     vi.mocked(func.getAllPosts).mockResolvedValue(mockPosts)
 
     const res = await request(server).get('/api/v1/posts/')
-    // console.log(res.body)
     expect(res.body).toMatchInlineSnapshot(`
       [
         {
@@ -87,7 +86,6 @@ describe('Getting all posts', () => {
   it('throws a database error when something went wrong', async () => {
     vi.mocked(func.getAllPosts).mockRejectedValue(mockPosts)
     const res = await request(server).get('/api/v1/posts/')
-    // console.log(res.body)
     expect(res.statusCode).toBe(500)
   })
 })
