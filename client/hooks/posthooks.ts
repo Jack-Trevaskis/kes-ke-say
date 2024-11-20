@@ -19,7 +19,7 @@ export function usePost(id: string) {
     queryKey: ['post', id],
     queryFn: () => api.getPostById(id),
   })
-  return query
+  return { ...query, delete: usePostDelete() }
 }
 
 export function usePostMutation<TData = unknown, TVariables = unknown>(
@@ -31,8 +31,12 @@ export function usePostMutation<TData = unknown, TVariables = unknown>(
     mutationFn,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['post'] })
-      queryClient.invalidateQueries({ queryKey: ['posts'] })
+      // queryClient.invalidateQueries({ queryKey: ['posts'] })
     },
   })
   return mutation
+}
+
+export function usePostDelete() {
+  return usePostMutation(api.deletePostById)
 }
