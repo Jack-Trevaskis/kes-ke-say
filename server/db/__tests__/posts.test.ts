@@ -1,4 +1,4 @@
-import { beforeAll, beforeEach, expect, describe, it } from 'vitest'
+import { beforeAll, beforeEach, expect, describe, it, afterAll } from 'vitest'
 import * as func from '../functions/posts'
 import db from '../connection'
 import { PostResponse } from '../../../models/post'
@@ -8,6 +8,10 @@ beforeAll(async () => {
 })
 beforeEach(async () => {
   await db.seed.run()
+})
+
+afterAll(async () => {
+  await db.destroy()
 })
 
 describe('getAllPosts', () => {
@@ -24,5 +28,12 @@ describe('getPostById', () => {
     const post: PostResponse = await func.getPostById('1')
 
     expect(post.userId).toBe('auth0|123')
+  })
+})
+
+describe('deletePost', () => {
+  it('deletes a post given an id', async () => {
+    const step2 = await func.deletePost('2')
+    expect(step2).toBe(1)
   })
 })
