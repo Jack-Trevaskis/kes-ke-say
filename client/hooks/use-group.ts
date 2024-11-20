@@ -1,17 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
-import request from "superagent";
+import { useQuery } from '@tanstack/react-query'
+import * as API from '../apis/group.ts'
 
-export default function useGroup() {
-    return useQuery({
-        queryKey: ['groups'],
-        queryFn: async () => {
-            const res = await request.get('/api/v1/groups/1')
-            if (res.ok) {
-                // console.log('res.body:', res.body)
-                return res.body
-            }
-
-            throw new Error(res.text);
-        }
-    })
+export default function useGroup(id: number) {
+  return useQuery({
+    queryKey: ['groups', id], // Include `id` in the query key for caching
+    queryFn: () => API.getGroupById(id), // Pass `id` to the API function
+    enabled: !!id, // Ensures the query only runs when `id` is truthy
+  })
 }

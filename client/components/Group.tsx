@@ -8,18 +8,18 @@ export function Group() {
   const [comp, setComp] = useState('');
   const navigate = useNavigate();
 
-  const { isLoading, isError, data: group = [] } = useGroup(); // Default `group` to an empty array.
-
-
-  // Conditional rendering based on the query state.
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error loading groups!</div>;
-
-  console.log(group)
-
   const { id } = useParams();
   const groupId = parseInt(id || '', 10);
   console.log(groupId);
+
+  const { isLoading, isError, data: group } = useGroup(groupId); // Default `group` to an empty array
+
+  // Conditional rendering based on the query state.
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error!</div>;
+
+  console.log(group)
+
 
   const viewAllGroups = () => {
     navigate('/groups');
