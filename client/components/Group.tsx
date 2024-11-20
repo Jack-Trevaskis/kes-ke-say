@@ -11,10 +11,7 @@ export function Group() {
   if (isLoading) return <div>Loading...</div>
   if (isError) return <div>Error loading groups!</div>
 
-  console.log(groups)
-
   const groupId = parseInt(id || '', 10)
-  console.log(groupId)
 
   const viewAllGroups = () => {
     navigate('/groups')

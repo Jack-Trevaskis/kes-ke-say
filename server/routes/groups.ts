@@ -8,10 +8,9 @@ router.get('/', async (req, res) => {
   // res.status(200).send('Hello from the groups route!')
   try {
     const groups = await db.getAllGroups()
-    // console.log(groups)
     res.json(groups)
   } catch (err) {
-    console.log('error')
+    console.error('error')
   }
 })
 

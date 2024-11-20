@@ -11,8 +11,6 @@ export function AllGroups() {
   if (isLoading) return <div>Loading...</div>
   if (isError) return <div>Error loading groups</div>
 
-  console.log(groups)
-
   return (
     <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
       <button
