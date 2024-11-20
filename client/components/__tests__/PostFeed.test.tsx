@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { describe, it, beforeAll, afterEach, vi, expect } from 'vitest'
-import { screen, waitForElementToBeRemoved } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import { renderRoute } from '../../test-utils'
 import nock from 'nock'
 import TestLoading from './TestLoading'
