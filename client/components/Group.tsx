@@ -22,9 +22,8 @@ export function Group() {
 
 
   const viewAllGroups = () => {
-    navigate('/groups');
-  };
-
+    navigate('/groups')
+  }
 
   return (
     <div
@@ -110,6 +109,7 @@ export function Group() {
           }}
         >
           {group.name}
+
         </p>
       </div>
 
@@ -157,5 +157,5 @@ export function Group() {
         </button>
       </div>
     </div>
-  );
+  )
 }
