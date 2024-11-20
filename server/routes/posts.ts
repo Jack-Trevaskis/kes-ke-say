@@ -31,4 +31,20 @@ router.get('/:id', async (req, res) => {
   }
 })
 
+router.delete('/:id', async (req, res) => {
+  try {
+    const result = await db.deletePost(req.params.id)
+    if (result === 0) {
+      res.sendStatus(404)
+    } else res.sendStatus(204)
+
+    // res.sendStatus(204)
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message)
+    } else console.error('unknown error')
+    res.sendStatus(500)
+  }
+})
+
 export default router
