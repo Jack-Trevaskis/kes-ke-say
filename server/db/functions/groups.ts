@@ -16,7 +16,6 @@ export async function getAllGroups() {
 
 export async function getGroupById (id: number) {
     const group = await db('groups').where('id', id).first()
-    console.log('group by id: ' + group)
     return group
 }
 
