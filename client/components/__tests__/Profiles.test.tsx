@@ -55,19 +55,26 @@ describe('<Profile />', () => {
     expect(scope.isDone()).toBe(true)
   })
 
+      //!!! vv this test will need to be updated once AuthN is sorted because Ida is not going to be hardcoded as the currentUser
   it("should render Edit button for currentUser's own page", async () => {
-    //this test will need to be updated once AuthN is sorted
     const scope = nock(document.baseURI)
-      .get(`/api/v1/users/${"ida"}`)
-      .reply(200, mockUser)
+      .get(`/api/v1/users/ida`)
+      .reply(200,   {
+        id: 2,
+        auth0_id: 'auth0|234',
+        username: 'ida',
+        full_name: 'Ida Dapizza',
+        location: 'Auckland',
+        image: 'ava-02.png',
+      })
 
     const { ...screen } = renderRoute('/profiles/ida')
     await waitForElementToBeRemoved(() => screen.getByText(/loading/i))
 
-    const editbutton = screen.findByText(/edit/i)
+    const editbutton = await screen.findByText(/edit/i)
 
     expect(editbutton).toBeInTheDocument()
-    // expect(() => screen.getByText(/edit/i))
+    expect(screen.queryByRole('button', { name: /edit/i })).not.toBeNull()
     expect(scope.isDone()).toBe(true)
   })
 
@@ -75,11 +82,11 @@ describe('<Profile />', () => {
     const scope = nock(document.baseURI)
       .get('/api/v1/users/paige')
       .reply(200,mockUser)
-    const { ...screen } = renderRoute('/profiles/paige')
 
+    const { ...screen } = renderRoute('/profiles/paige')
     await waitForElementToBeRemoved(() => screen.getByText(/loading/i))
-    
-    expect(() => screen.getByText(/exit/i)).toThrow() //this doesn't work as we expect
+ 
+    expect(screen.queryByRole('button', { name: /edit/i })).toBeNull()
     expect(scope.isDone()).toBe(true)
   })
 
