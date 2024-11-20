@@ -10,7 +10,7 @@ export async function getAllUsers(): Promise<User[]>  {
   return response.body as User[]
 }
 
-export async function getUser (username: string | undefined): Promise<User> {
+export async function getUser (username: string): Promise<User> {
 const response = await request.get(`${rootURL}/users/${username}`)
   return response.body as User
 }

@@ -1,7 +1,7 @@
 // As a user I want to view my own profile and see an edit button
 // As a user I want to view another persons profile (no edit button should show)
 
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { useUser } from "../hooks/useUsers"
 
 // The profile should display: Avatar, username, full name and location
@@ -12,9 +12,9 @@ const user = {
 
 export default function Profile () {
     const { username }  = useParams() 
-    const {data: viewUser, isLoading, isError} = useUser(username)
+    const {data: viewUser, isLoading, isError} = useUser(username ? username : '')
     if(isLoading) return "Loading..."
-    if(isError) return <h2>An error has occurred loading users.</h2>
+    if(isError) return <h2>An error has occurred loading user. User possibly doesn&apos;t exist.</h2>
 
  const isUserAuth = () => {
     if (user.username === viewUser?.username) {
@@ -24,6 +24,11 @@ export default function Profile () {
 
     return (
     <>
+        <div className="navbuttoncontainer flex justify-center gap-4 bg-red-800 text-white pt-2">
+            <Link to={`/post/${username}`} className="userPostsLnk btn-blue ml-[550px]"> 
+                View Posts</Link>
+            <Link to ={`/profiles`}><button className="allUsersLnk btn-blue">View All Users</button></Link>
+        </div>
      <div className="profile bg-red-800 text-white text-center p-4 flex flex-col items-center" >
             <img 
                 alt={`${viewUser.username}'s avatar`} 
