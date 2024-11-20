@@ -62,7 +62,7 @@ describe('<PostFeed />', () => {
     renderRoute('/')
     await TestLoading()
 
-    const section = screen.getByTestId('post-feed')
+    const section = screen.getByLabelText('Post Feed')
 
     expect(section).toBeInTheDocument()
   })
@@ -72,20 +72,21 @@ describe('<PostFeed />', () => {
     renderRoute('/')
     await TestLoading()
 
-    const section = screen.getByTestId('post-feed')
+    const section = screen.getByLabelText('Post Feed')
 
     expect(section.children).toHaveLength(3)
   })
 
-  it("should display first post's data in an appropriate way", async () => {
+  it("should display third post's data in an appropriate way", async () => {
     nock(document.baseURI).get('/api/v1/posts').reply(200, mockResponse)
     renderRoute('/')
     await TestLoading()
 
-    const post = screen.getByTestId('post-feed').children[2]
-    const avatar = post.querySelector('[data-testid="post-user-avatar"]')
-    const username = post.querySelector('[data-testid="post-user-name"]')
-    const postBody = post.querySelector('[data-testid="post-body"]')
+    const post = screen.getByLabelText('Post Feed').children[2]
+    const profileLink = post.querySelector('[aria-label="Profile Link"]')
+    const avatar = profileLink?.querySelector('img')
+    const username = profileLink?.querySelector('p')
+    const postBody = profileLink?.parentElement?.children[1]
 
     expect(avatar).toBeInTheDocument()
     expect(avatar).toHaveAttribute('src', '/images/avatars/ava-02.png')
