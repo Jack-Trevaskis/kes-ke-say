@@ -8,10 +8,10 @@ router.get('/', async (req, res) => {
   // res.status(200).send('Hello from the groups route!')
   try {
     const groups = await db.getAllGroups()
-    // console.log(groups)
     res.json(groups)
   } catch (err) {
-    console.log('error')
+
+    console.error('error')
   }})
 
 // GET /api/v1/groups/:id
@@ -22,8 +22,9 @@ router.get('/:id',async (req, res) => {
   console.log(group)
   
     res.json(group)
+
   }
-  catch (err) {console.log('error')}
+  catch (err) {console.error('error')}
   
 
 })

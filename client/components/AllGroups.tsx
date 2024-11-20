@@ -11,8 +11,6 @@ export function AllGroups() {
   if (isLoading) return <div>Loading...</div>
   if (isError) return <div>Error loading groups</div>
 
-  console.log(groups)
-
   return (
     <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
       <button
@@ -38,7 +36,7 @@ export function AllGroups() {
       >
         {groups.length > 0 ? (
           groups.map((group: Group) => (
-            <div
+            <button
               key={group.id}
               onClick={() => navigate('/groups/' + group.id)}
               style={{
@@ -74,7 +72,7 @@ export function AllGroups() {
               >
                 {group.name}
               </div>
-            </div>
+            </button>
           ))
         ) : (
           <div style={{ textAlign: 'center', color: '#555' }}>

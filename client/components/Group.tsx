@@ -1,11 +1,9 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 
 import useGroup from "../hooks/use-group";
-import { Group as GroupInterface} from '../../models/groups.ts'
 
 export function Group() {
-  const [comp, setComp] = useState('');
+
   const navigate = useNavigate();
 
   const { id } = useParams();
@@ -17,9 +15,6 @@ export function Group() {
   // Conditional rendering based on the query state.
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error!</div>;
-
-  console.log(group)
-
 
   const viewAllGroups = () => {
     navigate('/groups')

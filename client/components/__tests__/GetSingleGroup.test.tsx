@@ -61,5 +61,6 @@ describe('Single Groups', () => {
 
     const errorMessage = await screen.findByText(/Error/i);
     expect(errorMessage).toBeInTheDocument();
+    expect(scope.isDone()).toBe(true)
   });
 })

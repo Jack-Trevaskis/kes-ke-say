@@ -3,7 +3,7 @@ import type { Group } from '../../models/groups'
 
 const rootURL = new URL(`/api/v1`, document.baseURI).toString()
 
-export async function getGroupById(id: Number) {
+export async function getGroupById(id: number) {
     const response = await request.get(`${rootURL}/groups/${id}`)
 
     return response.body as Group

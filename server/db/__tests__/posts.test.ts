@@ -4,11 +4,9 @@ import db from '../connection'
 import { PostResponse } from '../../../models/post'
 
 beforeAll(async () => {
-  // console.log('before all')
   await db.migrate.latest()
 })
 beforeEach(async () => {
-  // console.log('before each ')
   await db.seed.run()
 })
 

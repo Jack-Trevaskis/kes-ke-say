@@ -1,8 +1,9 @@
 // @vitest-environment jsdom
 import { describe, it, beforeAll, afterEach, vi, expect } from 'vitest'
-import { screen, waitForElementToBeRemoved } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import { renderRoute } from '../../test-utils'
 import nock from 'nock'
+import TestLoading from './TestLoading'
 
 beforeAll(() => {
   nock.disableNetConnect()
@@ -53,39 +54,33 @@ describe('<PostFeed />', () => {
   it('should render loading spinner', async () => {
     nock(document.baseURI).get('/api/v1/posts').reply(200, mockResponse)
     renderRoute('/')
-
-    const loadingMessage = screen.getByText(/loading/i)
-    expect(loadingMessage).toBeInTheDocument()
+    await TestLoading()
   })
 
   it('should render post-feed section', async () => {
     nock(document.baseURI).get('/api/v1/posts').reply(200, mockResponse)
     renderRoute('/')
-
-    const loadingMessage = screen.getByText(/loading/i)
-    await waitForElementToBeRemoved(loadingMessage)
+    await TestLoading()
 
     const section = screen.getByTestId('post-feed')
+
     expect(section).toBeInTheDocument()
   })
 
   it('should show 2 posts', async () => {
     nock(document.baseURI).get('/api/v1/posts').reply(200, mockResponse)
     renderRoute('/')
-
-    const loadingMessage = screen.getByText(/loading/i)
-    await waitForElementToBeRemoved(loadingMessage)
+    await TestLoading()
 
     const section = screen.getByTestId('post-feed')
+
     expect(section.children).toHaveLength(3)
   })
 
   it("should display first post's data in an appropriate way", async () => {
     nock(document.baseURI).get('/api/v1/posts').reply(200, mockResponse)
     renderRoute('/')
-
-    const loadingMessage = screen.getByText(/loading/i)
-    await waitForElementToBeRemoved(loadingMessage)
+    await TestLoading()
 
     const post = screen.getByTestId('post-feed').children[2]
     const avatar = post.querySelector('[data-testid="post-user-avatar"]')
