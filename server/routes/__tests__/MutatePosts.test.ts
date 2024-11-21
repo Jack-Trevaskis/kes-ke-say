@@ -3,7 +3,6 @@ import {
   it,
   expect,
   afterAll,
-  vi,
   beforeAll,
   beforeEach,
 } from 'vitest'
