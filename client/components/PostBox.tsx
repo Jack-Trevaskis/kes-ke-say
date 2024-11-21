@@ -10,9 +10,6 @@ interface Props {
 export default function PostBox({ post }: Props) {
   const postHook = usePost(String(post.postId))
 
-  if (postHook.isLoading) return <p>none</p>
-  if (postHook.isError) return <p>none</p>
-
   const {
     userImage,
     userAccountName,
