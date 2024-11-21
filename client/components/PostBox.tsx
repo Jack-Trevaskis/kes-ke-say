@@ -8,8 +8,6 @@ interface Props {
 }
 
 export default function PostBox({ post }: Props) {
-  const postHook = usePost(String(post.postId))
-
   const {
     userImage,
     userAccountName,
@@ -25,10 +23,6 @@ export default function PostBox({ post }: Props) {
     cheese: 25,
     sunrise: 0,
     icon: 53,
-  }
-
-  const handleDelete = () => {
-    postHook.delete.mutate(String(postId))
   }
 
   return (
