@@ -39,7 +39,7 @@ describe('Single Groups', () => {
     // ACT
     // Render the component
     const { ...screen } = renderRoute('/groups/1')
-    screen.debug()
+   
     // ASSERT
     // Check if the loading message is not displayed
     await waitForElementToBeRemoved(() => screen.getByText(/loading/i))
