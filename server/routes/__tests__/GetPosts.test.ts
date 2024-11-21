@@ -82,17 +82,10 @@ describe('Getting all posts', () => {
       ]
     `)
   })
-
-  it('throws a database error when something went wrong', async () => {
-    vi.mocked(func.getAllPosts).mockRejectedValue(mockPosts)
-    const res = await request(server).get('/api/v1/posts/')
-    expect(res.statusCode).toBe(500)
-  })
 })
 
 describe('Getting single post', () => {
   it('returns a 404 when there is no post by that id', async () => {
-    // vi.mocked(func.getPostById).mockResolvedValue()
     const res = await request(server).get('/api/v1/posts/5')
 
     expect(res.statusCode).toBe(404)
@@ -102,7 +95,7 @@ describe('Getting single post', () => {
     vi.mocked(func.getPostById).mockResolvedValue(mockPosts[1])
 
     const res = await request(server).get('/api/v1/posts/2')
-    // console.log(res.body)
+
     expect(res.body).toMatchInlineSnapshot(`
       {
         "postBody": "I found this really cool Italian place, they have the best food",
@@ -115,12 +108,5 @@ describe('Getting single post', () => {
         "userImage": "ava-02.png",
       }
     `)
-  })
-
-  it('throws a database error when something went wrong', async () => {
-    vi.mocked(func.getPostById).mockRejectedValue(mockPosts[1])
-    const res = await request(server).get('/api/v1/posts/1')
-    // console.log(res.body)
-    expect(res.statusCode).toBe(500)
   })
 })

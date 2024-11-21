@@ -1,4 +1,4 @@
-import { usePosts } from '../hooks/posthooks'
+import { usePosts } from '../hooks/use-posts'
 import PostBox from './PostBox'
 import Spinner from './Spinner'
 
