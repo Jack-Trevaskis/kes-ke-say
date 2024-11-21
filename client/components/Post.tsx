@@ -1,14 +1,17 @@
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { usePost, usePostDelete } from '../hooks/use-posts'
 import Spinner from './Spinner'
 import serialiseDate from '../utils/serialiseDate'
 import ReactionBox from './RatingBox'
 import { FormEvent } from 'react'
+import { useAccount } from '../hooks/use-account'
 
 export default function Post() {
   const { id } = useParams()
+  const { data: account } = useAccount()
   const { data: post, isLoading, isError } = usePost(id || '')
   const { mutate: deletePost } = usePostDelete()
+  const navigate = useNavigate()
 
   if (isLoading) return <Spinner />
   if (isError || !post) return <p>Error</p>
@@ -29,8 +32,9 @@ export default function Post() {
     icon: 53,
   }
 
-  const handleDelete = () => {
-    if (id) deletePost(id)
+  const handleDelete = async () => {
+    deletePost(String(post.postId))
+    navigate('/')
   }
 
   const handleSubmit = (event: FormEvent) => {
@@ -65,12 +69,14 @@ export default function Post() {
       <span className="block mt-4">
         <ReactionBox votes={postVotes} />
       </span>
-      <button
-        onClick={handleDelete}
-        className="mt-4 text-sm font-semibold text-red-600"
-      >
-        Delete
-      </button>
+      {account?.username === post.userAccountName && (
+        <button
+          onClick={handleDelete}
+          className="mt-4 text-sm font-semibold text-red-600"
+        >
+          Delete
+        </button>
+      )}
       <form action="POST" onSubmit={handleSubmit}>
         <textarea
           name="comment"
