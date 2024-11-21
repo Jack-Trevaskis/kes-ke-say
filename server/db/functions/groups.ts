@@ -14,7 +14,13 @@ export async function getAllGroups() {
   return groups
 }
 
+export async function getGroupById (id: number) {
+    const group = await db('groups').where('id', id).first()
+    return group
+}
+
 // Create
+
 
 // Read
 
