@@ -115,26 +115,4 @@ describe('<Profile />', () => {
     expect(errorMessage).toBeInTheDocument()
     expect(scope.isDone()).toBe(true)
   })
-
-  const emptyUsername = '' //testing a situation that ...?! 
-  it.todo('should render the AllProfiles component when the username is empty', async () => {
-    const { ...screen } = renderRoute(`/profiles/${emptyUsername}`)
-    const scope = nock(document.baseURI)
-    .get(`/api/v1/users/${emptyUsername}`)
-      .reply(200, [
-        {
-          id: 1,
-          username: 'paige',
-          location: 'Auckland',
-          image: 'ava-03.png'
-        }
-      ])
-   
-    await waitForElementToBeRemoved(() => screen.getByText(/loading/i))
-
-    const user1 = await screen.findByText(/users/i)
-
-    expect(user1).toBeInTheDocument()
-    expect(scope.isDone()).toBe(true)
-  })
 })

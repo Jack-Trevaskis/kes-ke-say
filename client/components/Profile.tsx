@@ -12,7 +12,7 @@ const user = {
 
 export default function Profile () {
     const { username }  = useParams() 
-    const {data: viewUser, isLoading, isError} = useUser(username ? username : '')
+    const {data: viewUser, isLoading, isError} = useUser(username)
     if(isLoading) return "Loading..."
     if(isError) return <h2>An error has occurred loading user. User possibly doesn&apos;t exist.</h2>
 
