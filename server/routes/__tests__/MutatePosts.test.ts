@@ -20,7 +20,6 @@ beforeEach(async () => {
 })
 
 afterAll(async () => {
-  vi.restoreAllMocks()
   await connection.destroy()
 })
 
