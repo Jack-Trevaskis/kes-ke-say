@@ -1,7 +1,5 @@
 export default function serialiseDate(date: number) {
   const _date = new Date(date)
-  const offset = _date.getTimezoneOffset()
-  const serialisedDate = new Date(_date.getTime() - offset * 60 * 1000)
 
   const monthString = (month: number) => {
     // Need to move to a separate utility function
@@ -23,12 +21,12 @@ export default function serialiseDate(date: number) {
     return monthString
   }
 
-  const hour = serialisedDate.getHours()
-  const minute = serialisedDate.getMinutes()
+  const hour = _date.getHours()
+  const minute = _date.getMinutes()
 
-  const month = serialisedDate.getMonth() + 1
-  const day = serialisedDate.getDate()
-  const year = serialisedDate.getFullYear()
+  const month = _date.getMonth() + 1
+  const day = _date.getDate()
+  const year = _date.getFullYear()
 
   const currentDate = new Date()
   const currentMonth = currentDate.getMonth() + 1
