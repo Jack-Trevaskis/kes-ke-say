@@ -58,4 +58,16 @@ describe('<Post />', () => {
     expect(profileLink).toHaveTextContent('Ida Dapizza (ida)')
     expect(pageContainer).toHaveTextContent('No pineapples')
   })
+
+  it('should delete a post', async () => {
+    nock(document.baseURI).get('/api/v1/posts/3').reply(200, mockResponse)
+    nock(document.baseURI).delete('/api/v1/posts/3').reply(204)
+    renderRoute('/post/3')
+    await TestLoading()
+
+    const deleteButton = screen.getByRole('button', { name: 'Delete' })
+    deleteButton.click()
+
+    expect(await screen.findByText('Error')).toBeInTheDocument()
+  })
 })
