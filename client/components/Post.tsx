@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
-import { usePost } from '../hooks/posthooks'
+import { usePost, usePostDelete } from '../hooks/use-posts'
 import Spinner from './Spinner'
 import serialiseDate from '../utils/serialiseDate'
 import ReactionBox from './RatingBox'
@@ -8,6 +8,7 @@ import { FormEvent } from 'react'
 export default function Post() {
   const { id } = useParams()
   const { data: post, isLoading, isError } = usePost(id || '')
+  const { mutate: deletePost } = usePostDelete()
 
   if (isLoading) return <Spinner />
   if (isError || !post) return <p>Error</p>
@@ -28,9 +29,12 @@ export default function Post() {
     icon: 53,
   }
 
+  const handleDelete = () => {
+    if (id) deletePost(id)
+  }
+
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault()
-    console.log('testing form')
   }
 
   return (
@@ -61,6 +65,12 @@ export default function Post() {
       <span className="block mt-4">
         <ReactionBox votes={postVotes} />
       </span>
+      <button
+        onClick={handleDelete}
+        className="mt-4 text-sm font-semibold text-red-600"
+      >
+        Delete
+      </button>
       <form action="POST" onSubmit={handleSubmit}>
         <textarea
           name="comment"
