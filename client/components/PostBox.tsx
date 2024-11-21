@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { PostResponse } from '../../models/post'
 import serialiseDate from '../utils/serialiseDate'
-import { usePost } from '../hooks/posthooks'
+import ReactionBox from './RatingBox'
 
 interface Props {
   post: PostResponse
@@ -32,96 +32,30 @@ export default function PostBox({ post }: Props) {
   }
 
   return (
-    <div className="flex gap-8 text-sky-800">
-      <div className="flex-1">
-        <Link
-          to={'/profiles/' + userAccountName}
-          className="flex items-center gap-4 hover:underline font-semibold"
-        >
-          <img
-            data-testid="post-user-avatar"
-            src={`/images/avatars/${userImage}`}
-            alt=""
-            className="size-8 bg-blue-300 rounded-full"
-          />
-          <p data-testid="post-user-name">
-            {userFullName} ({userAccountName})
-          </p>
-        </Link>
-        <p data-testid="post-body" className="mt-4">
-          {postBody}
-        </p>
-        {postImage && <img src={postImage} alt="" className="mt-2 max-h-96" />}
-
-        <span className="mt-6 text-xs flex items-center gap-2">
-          <p className="relative top-[2px] text-slate-400">
-            {serialiseDate(postCreatedAt)}
-          </p>
-        </span>
-
-        <span className="mt-1 text-sm flex items-center gap-2">
-          <Link className="hover:underline" to={'/post/' + postId}>
-            Open
-          </Link>
-          <button onClick={handleDelete} className="hover:underline">
-            Delete
-          </button>
-          <ReactionBox votes={postVotes} />
-        </span>
-      </div>
-    </div>
-  )
-}
-
-interface Votes {
-  glasses: number
-  cheese: number
-  sunrise: number
-  icon: number
-}
-
-function ReactionBox({ votes }: { votes: Votes }) {
-  const serialiseVotes = (votes: Votes) => {
-    const glasses = votes.glasses
-    const cheese = votes.cheese
-    const sunrise = votes.sunrise
-    const icon = votes.icon
-
-    return { glasses, cheese, sunrise, icon }
-  }
-
-  const { glasses, cheese, sunrise, icon } = serialiseVotes(votes)
-
-  return (
-    <div className="flex gap-4 ml-auto text-slate-400">
-      <button className="relative flex justify-center items-center">
+    <div className="text-sky-900">
+      <Link
+        aria-label="Profile Link"
+        to={'/profiles/' + userAccountName}
+        className="hover:underline flex items-center gap-4 font-semibold"
+      >
         <img
-          src="/images/icons/glasses-darkgray.png"
-          alt=""
-          className="size-6"
+          src={`/images/avatars/${userImage}`}
+          alt={userFullName}
+          className="size-8 bg-blue-300 rounded-full"
         />
-        <p className="relative top-[2px] ml-1 text-xs">{glasses}</p>
-      </button>
-      <button className="relative flex justify-center items-center">
-        <img
-          src="/images/icons/cheese-darkgray.png"
-          alt=""
-          className="size-6"
-        />
-        <p className="relative top-[2px] ml-1 text-xs">{cheese}</p>
-      </button>
-      <button className="relative flex justify-center items-center">
-        <img
-          src="/images/icons/sunrise-darkgray.png"
-          alt=""
-          className="size-6"
-        />
-        <p className="relative top-[2px] ml-1 text-xs">{sunrise}</p>
-      </button>
-      <button className="relative flex justify-center items-center">
-        <img src="/images/icons/icon-darkgray.png" alt="" className="size-6" />
-        <p className="relative top-[2px] ml-1 text-xs">{icon}</p>
-      </button>
+        <p className="text-sky-800">{`${userFullName} (${userAccountName})`}</p>
+      </Link>
+      <p className="mt-4">{postBody}</p>
+      {postImage && (
+        <img src={postImage} alt="" className="mt-2 max-h-[38rem] rounded-md" />
+      )}
+      <span className="mt-6 text-sm flex items-end gap-2 text-slate-500">
+        {serialiseDate(postCreatedAt)}
+        <ReactionBox votes={postVotes} />
+      </span>
+      <Link to={'/post/' + postId} className="hover:underline font-semibold">
+        Open
+      </Link>
     </div>
   )
 }
