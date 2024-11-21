@@ -43,3 +43,19 @@ describe('Getting All Groups', () => {
     `)
   })
 })
+
+describe('Get single group by id', () => {
+    it('should return an array of a single group', async () => {
+      const response = await request(server).get('/api/v1/groups/1')
+      expect(response.status).toBe(200)
+      expect(response.body).toMatchInlineSnapshot(`
+        
+          {
+            "id": 1,
+            "image": "fries-darkgray.png",
+            "name": "friendChips",
+          }
+        
+      `)
+    })
+  })
