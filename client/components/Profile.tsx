@@ -15,7 +15,7 @@ export default function Profile () {
     if(isError) return <h2>An error has occurred loading user. User possibly doesn&apos;t exist.</h2>
 
  const isUserAuth = () => {
-    if (account?.fullName === viewUser?.username) {
+    if (account?.username === viewUser?.username) {
         return <button className="btn-blue">Edit</button>
     }
   }
@@ -36,7 +36,7 @@ export default function Profile () {
             <h2 className="profileName">{viewUser.username}</h2>
             <p className="fullName">{viewUser.fullName}</p>
             <p className="location">{viewUser.location}</p>
-            {account?.fullName && isUserAuth()}
+            {account?.username && isUserAuth()}
         </div>
     </>
     )
