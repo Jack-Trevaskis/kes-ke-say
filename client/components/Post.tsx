@@ -1,9 +1,9 @@
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import { usePost, usePostDelete } from '../hooks/use-posts'
 import Spinner from './Spinner'
 import serialiseDate from '../utils/serialiseDate'
 import ReactionBox from './RatingBox'
-import { FormEvent } from 'react'
+import { FormEvent, useState } from 'react'
 import { useAccount } from '../hooks/use-account'
 
 export default function Post() {
@@ -11,10 +11,12 @@ export default function Post() {
   const { data: account } = useAccount()
   const { data: post, isLoading, isError } = usePost(id || '')
   const { mutate: deletePost } = usePostDelete()
+  const [isDeleted, setIsDeleted] = useState(false)
+  const navigate = useNavigate()
 
   if (isLoading) return <Spinner />
-  if (isError) return <p className='py-24 text-center'>Error</p>
-  if (!post) return <p className='py-24 text-center'>No post to show</p>
+  if (isError) return <p className="py-24 text-center">Error</p>
+  if (!post) return <p className="py-24 text-center">No post to show</p>
 
   const {
     userImage,
@@ -34,10 +36,16 @@ export default function Post() {
 
   const handleDelete = async () => {
     deletePost(String(post.postId))
+    setIsDeleted(true)
+    setTimeout(() => navigate('/'), 2000)
   }
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault()
+  }
+
+  if (isDeleted) {
+    return <main className="py-24 text-center">Post deleted</main>
   }
 
   return (
