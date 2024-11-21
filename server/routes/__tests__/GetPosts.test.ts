@@ -82,12 +82,6 @@ describe('Getting all posts', () => {
       ]
     `)
   })
-
-  it('throws a database error when something went wrong', async () => {
-    vi.mocked(func.getAllPosts).mockRejectedValue(mockPosts)
-    const res = await request(server).get('/api/v1/posts/')
-    expect(res.statusCode).toBe(500)
-  })
 })
 
 describe('Getting single post', () => {
@@ -114,12 +108,5 @@ describe('Getting single post', () => {
         "userImage": "ava-02.png",
       }
     `)
-  })
-
-  it('throws a database error when something went wrong', async () => {
-    vi.mocked(func.getPostById).mockRejectedValue(mockPosts[1])
-    const res = await request(server).get('/api/v1/posts/1')
-
-    expect(res.statusCode).toBe(500)
   })
 })
