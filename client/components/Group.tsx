@@ -8,7 +8,7 @@ export function Group() {
 
   const { id } = useParams();
   const groupId = parseInt(id || '', 10);
-
+ 
   const { isLoading, isError, data: group } = useGroup(groupId); // Default `group` to an empty array
 
   // Conditional rendering based on the query state.
