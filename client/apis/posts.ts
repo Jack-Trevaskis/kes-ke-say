@@ -7,3 +7,8 @@ export async function getAllPosts(): Promise<PostResponse[]> {
   const result = await request.get(`${rootURL}/posts`)
   return result.body as PostResponse[]
 }
+
+export async function getPostById(id: string): Promise<PostResponse> {
+  const result = await request.get(`${rootURL}/posts/${id}`)
+  return result.body as PostResponse
+}

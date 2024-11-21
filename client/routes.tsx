@@ -3,6 +3,7 @@ import { createRoutesFromElements, Route } from 'react-router-dom'
 import LandingPage from './components/LandingPage'
 import App from './components/App'
 import Home from './components/Home'
+import Post from './components/Post'
 import AllProfiles from './components/AllProfiles'
 import Profile from './components/Profile'
 import { AllGroups } from './components/AllGroups'
@@ -15,7 +16,7 @@ export const routes = createRoutesFromElements(
       {/* Replace the element with your React Component */}
       <Route path="post">
         <Route index element={<div>AddPost</div>} />
-        <Route path=":id" element={<div>Post</div>} />
+        <Route path=":id" element={<Post />} />
       </Route>
       <Route path="register" element={<div>Register</div>} />
       <Route path="profiles">
