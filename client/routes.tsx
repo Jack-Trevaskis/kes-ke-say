@@ -6,6 +6,8 @@ import Home from './components/Home'
 import Post from './components/Post'
 import AllProfiles from './components/AllProfiles'
 import Profile from './components/Profile'
+import { AllGroups } from './components/AllGroups'
+import { Group } from './components/Group'
 
 export const routes = createRoutesFromElements(
   <>
@@ -22,9 +24,9 @@ export const routes = createRoutesFromElements(
         <Route path=":username" element={<Profile />} />
       </Route>
       <Route path="groups">
-        <Route index element={<div>AllGroups</div>} />
+        <Route index element={<AllGroups />} />
         <Route path="add" element={<div>GroupProfileForm</div>} />
-        <Route path=":id" element={<div>Group</div>} />
+        <Route path=":id" element={<Group />} />
       </Route>
     </Route>
     <Route path="/login" element={<LandingPage />} />

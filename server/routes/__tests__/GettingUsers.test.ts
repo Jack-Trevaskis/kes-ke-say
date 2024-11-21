@@ -29,3 +29,27 @@ describe('GET ap1/v1/users', () => {
     expect(res.body).toEqual({ message: 'Cannot get all users' })
   })
 })
+
+describe('GET api/v1/users/:username', () => {
+  it('should show the user', async () => {
+    vi.mocked(usersDb.getUserByUsername).mockResolvedValue(mockUsers[1])
+    const username = mockUsers[1].username
+    const res = await request(server).get(`/api/v1/users/${username}`)
+    expect(res.statusCode).toBe(200)
+    expect(res.body).toEqual(mockUsers[1])
+  })
+  it('should return an error if the database is down', async () => {
+    vi.mocked(usersDb.getUserByUsername).mockRejectedValue(new Error('Database is down'))
+    const username = mockUsers[1]
+    const res = await request(server).get(`/api/v1/users/${username}`)
+    expect(res.statusCode).toBe(500)
+    expect(res.body).toEqual({message: 'Server error: Unable to access user data.'})
+  })
+  it('should return an error if user is not found', async () => {
+    const username = 'not-a-real-username'
+    vi.mocked(usersDb.getUserByUsername).mockResolvedValue(undefined)
+    const res = await request(server).get(`/api/v1/users/${username}`)
+    expect(res.statusCode).toBe(404)
+    expect(res.body).toEqual({ message: 'Cannot find user: not-a-real-username' })
+  })
+})
