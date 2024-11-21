@@ -37,7 +37,7 @@ export default function Post() {
     <main className="py-24 w-[38rem] mx-auto">
       <Link
         aria-label="Profile Link"
-        to={'/profiles' + userAccountName}
+        to={'/profiles/' + userAccountName}
         className="flex items-center gap-4 -translate-x-18"
       >
         <img
