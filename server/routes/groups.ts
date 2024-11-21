@@ -19,7 +19,6 @@ router.get('/:id',async (req, res) => {
   // res.status(200).send('Hello from the groups route!')
   try {
   const group = await db.getGroupById(+req.params.id)
-  console.log(group)
   
     res.json(group)
 

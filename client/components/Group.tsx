@@ -8,7 +8,6 @@ export function Group() {
 
   const { id } = useParams();
   const groupId = parseInt(id || '', 10);
-  console.log(groupId);
 
   const { isLoading, isError, data: group } = useGroup(groupId); // Default `group` to an empty array
 
