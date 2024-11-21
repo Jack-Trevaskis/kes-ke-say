@@ -8,6 +8,7 @@ import TestLoading from './TestLoading'
 beforeAll(() => {
   nock.disableNetConnect()
   vi.spyOn(console, 'log').mockImplementation(() => {})
+  // vi.spyOn(router, 'useNavigate').mockImplementation(() => navigate)
 })
 
 afterEach(() => {
@@ -67,17 +68,5 @@ describe('<Post />', () => {
 
     const deleteButton = screen.getByRole('button', { name: 'Delete' })
     expect(deleteButton).toBeInTheDocument()
-  })
-
-  it('should delete a post and redirect to home page', async () => {
-    nock(document.baseURI).get('/api/v1/posts/3').reply(200, mockResponse)
-    nock(document.baseURI).delete('/api/v1/posts/3').reply(204)
-    renderRoute('/post/3')
-    await TestLoading()
-
-    const deleteButton = screen.getByRole('button', { name: 'Delete' })
-    deleteButton.click()
-
-    expect(window.location.pathname).toBe('/')
   })
 })

@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { usePost, usePostDelete } from '../hooks/use-posts'
 import Spinner from './Spinner'
 import serialiseDate from '../utils/serialiseDate'
@@ -11,10 +11,10 @@ export default function Post() {
   const { data: account } = useAccount()
   const { data: post, isLoading, isError } = usePost(id || '')
   const { mutate: deletePost } = usePostDelete()
-  const navigate = useNavigate()
 
   if (isLoading) return <Spinner />
-  if (isError || !post) return <p>Error</p>
+  if (isError) return <p className='py-24 text-center'>Error</p>
+  if (!post) return <p className='py-24 text-center'>No post to show</p>
 
   const {
     userImage,
@@ -34,7 +34,6 @@ export default function Post() {
 
   const handleDelete = async () => {
     deletePost(String(post.postId))
-    navigate('/')
   }
 
   const handleSubmit = (event: FormEvent) => {
